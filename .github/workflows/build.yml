@@ -54,4 +54,4 @@ jobs:
           REPO: self
           BRANCH: builds
           FOLDER: $GITHUB_WORKSPACE/builds
-          SH_TOKEN: ${{ secrets.SH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SH_TOKEN }}
