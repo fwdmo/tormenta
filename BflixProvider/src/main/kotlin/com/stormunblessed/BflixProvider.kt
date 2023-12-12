@@ -164,7 +164,7 @@ open class BflixProvider : MainAPI() {
                     link,
                     this.name,
                     if (link.contains("/movie/")) TvType.Movie else TvType.TvSeries,
-                    it.selectFirst("a.film-poster img")!!.attr("data-src"),
+                    it.selectFirst(".poster a")!!.attr("data-src"),
                     null,
                     null,
                     quality = quality
