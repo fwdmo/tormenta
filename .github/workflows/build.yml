@@ -52,7 +52,7 @@ jobs:
       - name: Push builds
         run: |
           cd $GITHUB_WORKSPACE/builds
-          git remote set-url origin https://${{ secrets.SH_TOKEN }}@github.com/fwdmo/totmenta.git
+          git remote set-url origin https://${{ secrets.SH_TOKEN }}@github.com/fwdmo/tormenta.git
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add .
