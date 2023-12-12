@@ -154,7 +154,7 @@ open class BflixProvider : MainAPI() {
 
         testa.apmap {(name, element) ->
             val test = soup.select(element).map {
-                val title = it.selectFirst(".poster a")!!.text()
+                val title = it.selectFirst(".meta a")!!.text()
                 val link = fixUrl(it.selectFirst("a")!!.attr("href"))
                 val qualityInfo = it.selectFirst("div.quality")!!.text()
                 val quality = getQualityFromString(qualityInfo)
@@ -163,7 +163,7 @@ open class BflixProvider : MainAPI() {
                     link,
                     this.name,
                     if (link.contains("/movie/")) TvType.Movie else TvType.TvSeries,
-                    it.selectFirst(".poster a")!!.attr("data-src"),
+                    it.selectFirst(".poster a img")!!.attr("data-src"),
                     null,
                     null,
                     quality = quality
