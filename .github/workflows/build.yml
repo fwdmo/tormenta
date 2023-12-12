@@ -48,10 +48,13 @@ jobs:
           cp **/build/*.cs3 $GITHUB_WORKSPACE/builds
           cp build/plugins.json $GITHUB_WORKSPACE/builds
 
-      - name: Deploy
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: builds
-          FOLDER: builds
-          GITHUB_TOKEN: ${{ secrets.SH_TOKEN }}
+
+      - name: Push builds
+        run: |
+          cd $GITHUB_WORKSPACE/builds
+          git remote set-url origin https://${{ secrets.SH_TOKEN }}@github.com/fwdmo/totmenta.git
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit --amend -m "Build $GITHUB_SHA" || exit 0   # do not error if nothing to commit
+          git push --force
