@@ -140,8 +140,8 @@ open class BflixProvider : MainAPI() {
         val items = ArrayList<HomePageList>()
         val soup = app.get("$mainUrl/home").document
         val testa = listOf(
-            Pair("Movies", "div.tab-content[data-name=movies] div.film div.film-inner"),
-            Pair("Shows", "div.tab-content[data-name=shows] div.film div.film-inner"),
+            Pair("Movies", "div.tab-content[data-name=movies] div.movies.items"),
+            Pair("Shows", "div.tab-content[data-name=shows] div.movies.items"),
             Pair("Trending", "div.tab-content[data-name=trending] div.film div.film-inner"),
             Pair(
                 "Latest Movies",
@@ -155,7 +155,7 @@ open class BflixProvider : MainAPI() {
 
         testa.apmap {(name, element) ->
             val test = soup.select(element).map {
-                val title = it.selectFirst("a.film-name")!!.text()
+                val title = it.selectFirst(".poster a")!!.text()
                 val link = fixUrl(it.selectFirst("a")!!.attr("href"))
                 val qualityInfo = it.selectFirst("div.quality")!!.text()
                 val quality = getQualityFromString(qualityInfo)
